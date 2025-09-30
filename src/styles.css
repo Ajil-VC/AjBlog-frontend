@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #2c3e50;
+}
+
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.errorMsg {
+    color: red;
+    font-weight: lighter;
+    font-size: small;
+}
