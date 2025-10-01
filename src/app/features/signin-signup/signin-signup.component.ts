@@ -4,11 +4,14 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from './data/auth.service';
 import { ToastService } from '../../core/data/toast/toast.service';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-signin-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule],
   templateUrl: './signin-signup.component.html',
   styleUrl: './signin-signup.component.css'
 })
