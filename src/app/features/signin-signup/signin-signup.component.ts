@@ -52,6 +52,7 @@ export class SigninSignupComponent {
           }
         },
         error: (err) => {
+          console.log(err)
           this._toast.showError(err.message);
         }
       })
