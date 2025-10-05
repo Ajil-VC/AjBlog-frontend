@@ -4,7 +4,16 @@
 
     <div class="tiles">
         <app-post-card *ngFor="let story of stories" [story]="story"></app-post-card>
+        <div class="empty-state" *ngIf="stories.length === 0">
+
+            
+            <h2>No Stories Available</h2>
+            <p>Start sharing your stories and inspire others.</p>
+            <button class="btn-primary" (click)="createStory()">Create Story</button>
+        </div>
     </div>
+
+
 
     <app-pagination [currentPage]="currentPage" [totalPages]="totalPages"
         (pageChanged)="onPageChange($event)">></app-pagination>

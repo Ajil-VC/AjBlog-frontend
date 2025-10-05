@@ -39,7 +39,7 @@ export class HeaderComponent {
         distinctUntilChanged(),
         takeUntil(this.destroy$)
     ).subscribe(searchTerm => {
-        if (this.route.url === '/me') {
+        if (this.route.url === '/me' || this.route.url === '/story') {
             this.route.navigate(['']);
         }
         this.sharedService.searchStory(searchTerm || '');

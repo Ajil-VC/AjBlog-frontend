@@ -13,7 +13,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   if (!token) {
     authService.logoutUser();
-    return of(false);
+    return router.parseUrl('/signin');
   }
 
   return authService.authenticateUser().pipe(
@@ -21,14 +21,14 @@ export const authGuard: CanActivateFn = (route, state) => {
       if (res.status) {
         return true;
       }
-      
+
       authService.logoutUser();
-      return router.parseUrl('');
+      return router.parseUrl('/signin');
     }),
     catchError(() => {
-      
+
       authService.logoutUser();
-      return of(router.parseUrl(''));
+      return of(router.parseUrl('/signin'));
     })
   )
 };

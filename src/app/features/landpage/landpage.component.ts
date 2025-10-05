@@ -6,6 +6,7 @@ import { Post } from '../../core/domain/post.interface';
 import { Subject } from 'rxjs';
 import { SharedService } from '../../shared/shared service/shared.service';
 import { PaginationComponent } from "../pagination/pagination.component";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-landpage',
@@ -17,6 +18,7 @@ export class LandpageComponent {
 
     private destroy$ = new Subject<void>();
     sharedService = inject(SharedService);
+    route = inject(Router);
 
     constructor(private _mainService: MainService) { }
     stories: Post[] = [];
@@ -59,5 +61,9 @@ export class LandpageComponent {
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
+    }
+
+    createStory() {
+        this.route.navigate(['me']);
     }
 }

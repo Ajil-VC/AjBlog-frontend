@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, pipe, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { User } from '../../core/domain/user.interface';
@@ -62,6 +62,9 @@ export class AuthService {
   logoutUser() {
     this.shared.removeToken();
     this.user.next(null);
-    this.router.navigate(['']);
+
+    if (this.router.url === '/me') {
+      this.router.navigate(['']);
+    }
   }
 }

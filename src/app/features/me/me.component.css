@@ -1,18 +1,21 @@
 .field {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: space-between;
-    align-items: stretch;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-/* Fixed sidebar */
+/* Sidebar (Profile Section) */
 app-profile {
   width: 250px;
   max-height: 600px;
-  background-color: #f9fbfd; /* softer than aliceblue */
+  background-color: #f9fbfd;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* subtle shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -20,10 +23,53 @@ app-profile {
   gap: 15px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   flex-shrink: 0;
-  overflow-y: auto; /* in case content grows */
+  overflow-y: auto;
+  transition: all 0.3s ease;
 }
 
-/* Flexible content */
+/* Main Content Area */
 app-field {
-    flex: 1;
+  flex: 1;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  padding: 20px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+/* ----------- Responsive Section ----------- */
+@media (max-width: 900px) {
+  .field {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  app-field {
+    width: 100%;
+    order: 1;
+    /* main content first */
+  }
+
+  app-profile {
+    width: 100%;
+    max-height: none;
+    order: 2;
+    /* profile below */
+    margin-top: 20px;
+  }
+}
+
+/* Small Mobile Optimization */
+@media (max-width: 480px) {
+  .field {
+    padding: 5px;
+    gap: 10px;
+  }
+
+  app-profile,
+  app-field {
+    border-radius: 8px;
+    padding: 15px;
+  }
 }
