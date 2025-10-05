@@ -10,6 +10,11 @@ header {
     z-index: 1000;
     margin-bottom: 50px;
 }
+.leftside{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
 .logo {
     font-size: 1.5rem;
@@ -63,4 +68,10 @@ header {
 
 .search-bar input:focus {
     border-color: #0077ff;
+}
+
+.my-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }

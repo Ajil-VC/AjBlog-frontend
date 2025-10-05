@@ -1,0 +1,22 @@
+<div class="post-container">
+    <!-- Post Image -->
+    <img class="post-image"
+        [src]="(sharedService.story$ | async)?.imageUrl?.url || 'assets/images/636806413388270000.png'"
+        alt="Post image" />
+    <!-- Header -->
+    <h2 class="post-header">{{ (sharedService.story$ | async)?.title }}</h2>
+
+    <!-- Content -->
+    <p class="post-content">{{ (sharedService.story$ | async)?.content }}</p>
+
+    <!-- Footer -->
+    <div class="post-footer">
+        <div class="author">
+            <img class="author-dp" [src]="dp" alt="Author DP" />
+            <div>
+                <p class="author-email">{{ (sharedService.story$ | async)?.userId?.email }}</p>
+                <p class="post-date">{{ (sharedService.story$ | async)?.createdAt | date:'medium' }}</p>
+            </div>
+        </div>
+    </div>
+</div>

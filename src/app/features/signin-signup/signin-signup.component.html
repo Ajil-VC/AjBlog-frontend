@@ -3,8 +3,8 @@
     <h2>{{ type.replace('_',' ')| titlecase}}</h2>
 
     <div class="formgroup">
-        <label for="">Email</label>
-        <input formControlName="email" type="email">
+        <label for="email">Email</label>
+        <input formControlName="email" id="email" type="email">
 
         <ng-container *ngIf="formControl('email')?.dirty || formControl('email')?.touched">
             <p class="errorMsg" *ngIf="formControl('email')?.errors?.['required']">Email can’t be empty</p>
@@ -19,8 +19,8 @@
 
 
     <div class="formgroup">
-        <label for="">Password</label>
-        <input formControlName="password" type="password">
+        <label for="password">Password</label>
+        <input formControlName="password" id="password" type="password">
 
         <ng-container *ngIf="formControl('password')?.dirty || formControl('password')?.touched">
             <p class="errorMsg" *ngIf="formControl('password')?.errors?.['required']">Password can’t be empty</p>
@@ -30,8 +30,8 @@
 
 
     <div class="formgroup" *ngIf="type === 'sign_up'">
-        <label for="">User Name</label>
-        <input formControlName="userName" type="text">
+        <label for="userName">User Name</label>
+        <input formControlName="userName" id="userName" type="text">
     </div>
 
     <button type="submit">{{type.replace('_',' ')| titlecase}}</button>

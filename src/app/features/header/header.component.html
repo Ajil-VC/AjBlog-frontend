@@ -1,17 +1,24 @@
 <header>
-    <div class="logo" routerLink="/">AjBlogs</div>
-    <!-- Search Bar -->
-    <div class="search-bar">
-        <input type="text" placeholder="Search posts...">
+
+    <div class="leftside">
+        <div class="logo" routerLink="/" (click)="refreshPage()">AjBlogs</div>
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" placeholder="Search stories..." [formControl]="searchControl">
+        </div>
     </div>
 
     <div class="nav-icons">
-        <!-- Visible when NOT logged in -->
-        <a routerLink="/signup">Sign Up</a>/
-        <a routerLink="/signin">Sign In</a>
+        <div *ngIf="!(authService.$user | async)">
+            <a routerLink="/signup">Sign Up</a>/
+            <a routerLink="/signin">Sign In</a>
+        </div>
 
-        <!-- Profile icon (toggle this with JS after login) -->
-        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Profile" class="icon"
-            style="display:none;" id="profileIcon">
+        <div class="my-area">
+            <a *ngIf="authService.$user | async as user" [routerLink]="'me'">My Space</a>
+            <div *ngIf="authService.$user | async as user">
+                <img src="https://avatar.iran.liara.run/public" alt="Profile" class="icon" id="profileIcon">
+            </div>
+        </div>
     </div>
 </header>

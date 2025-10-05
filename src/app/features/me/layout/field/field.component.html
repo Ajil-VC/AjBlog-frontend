@@ -1,0 +1,63 @@
+<div class="blog-container">
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs">
+        <button class="tab" [class.active]="activeTab === 'create'" (click)="activeTab = 'create'">
+            Create Post
+        </button>
+        <button class="tab" [class.active]="activeTab === 'posts'" (click)="activeTab = 'posts'">
+            My Posts
+        </button>
+    </nav>
+
+    <!-- Create Post Section -->
+    <section *ngIf="activeTab === 'create'" class="create-post">
+        <div class="header">
+            <h2>Create a New Story</h2>
+            <select name="genre" id="genre" [(ngModel)]="newPost.genre">
+                <option value="" disabled selected>Select Genre</option>
+                <option *ngFor="let gen of genre" [value]="gen">{{gen}}</option>
+            </select>
+        </div>
+
+        <form #form="ngForm" (ngSubmit)="onCreatePost()">
+            <input type="text" placeholder="Post title" [(ngModel)]="newPost.title" name="title" required>
+            <textarea placeholder="Write your content..." [(ngModel)]="newPost.content" name="content"
+                required></textarea>
+
+            <div class="buttons">
+                <button type="button" class="addimage" (click)="fileInput.click()" aria-label="Add Image">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                <input type="file" #fileInput accept="image/*" style="display: none;" (change)="onFileSelected($event)">
+
+                <button type="submit">Publish</button>
+            </div>
+        </form>
+
+    </section>
+
+    <!-- Posts Section -->
+    <section *ngIf="activeTab === 'posts'" class="posts-list">
+        <h2>My Posts</h2>
+        <div class="storyloopcontainer">
+            <article *ngFor="let story of stories" class="post">
+
+                <div class="storythumb" (click)="openStory(story)">
+                    <img [src]="story.imageUrl?.url || 'assets/images/default_story_thumbnail.webp'">
+                </div>
+                <div class="storybody" (click)="openStory(story)">
+                    <h3>{{ story.title }}</h3>
+                    <p>{{ story.content }}</p>
+                    <small>{{ story.createdAt | date:'mediumDate' }}</small>
+                </div>
+
+                <button class=" edit-btn" (click)="editStory(story); $event.stopPropagation()">
+                    <i class="fas fa-edit"></i>
+                </button>
+
+            </article>
+        </div>
+    </section>
+
+</div>

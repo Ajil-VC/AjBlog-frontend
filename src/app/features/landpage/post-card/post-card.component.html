@@ -1,6 +1,13 @@
-<div class="post-card">
-    <img src="https://via.placeholder.com/300x200" alt="Post Image">
+<div class="post-card" (click)="openStory()">
+    <img [src]="storyImage" alt="">
+    <div class="author">
+        <div>
+            <img [src]="dp" alt="">
+        </div>
+        <h5>{{story.author.email}}</h5>
+    </div>
     <div class="post-content">
-        <h3>Post Title Three</h3>
+        <h2>{{story.title}}</h2>
+        <p>{{story.content}}</p>
     </div>
 </div>

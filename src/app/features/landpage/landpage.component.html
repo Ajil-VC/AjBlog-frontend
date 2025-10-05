@@ -1,8 +1,12 @@
 <!-- Posts Section -->
 <section class="posts">
 
-    <ng-container *ngFor="let i of [].constructor(150)">
-        <app-post-card></app-post-card>
-    </ng-container>
+
+    <div class="tiles">
+        <app-post-card *ngFor="let story of stories" [story]="story"></app-post-card>
+    </div>
+
+    <app-pagination [currentPage]="currentPage" [totalPages]="totalPages"
+        (pageChanged)="onPageChange($event)">></app-pagination>
 
 </section>

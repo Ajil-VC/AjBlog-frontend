@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { AuthService } from './data/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../shared/Auth service/auth.service';
 import { ToastService } from '../../core/data/toast/toast.service';
-import { BrowserModule } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-signin-signup',
@@ -24,7 +24,8 @@ export class SigninSignupComponent {
     private _fb: FormBuilder,
     private _route: ActivatedRoute,
     private _authService: AuthService,
-    private _toast: ToastService
+    private _toast: ToastService,
+    private _router: Router
   ) {
 
     this.authForm = this._fb.group({
@@ -51,12 +52,9 @@ export class SigninSignupComponent {
         next: (res) => {
 
           if (res.status) {
-            this._toast.showSuccess(res.message, 'Registration Success');
+            this._toast.showSuccess(res.message, 'Success');
+            this._router.navigate(['me'])
           }
-        },
-        error: (err) => {
-          console.log(err)
-          this._toast.showError(err.message);
         }
       })
   }

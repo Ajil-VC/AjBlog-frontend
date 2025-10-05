@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>Update Story</h2>
+
+<form [formGroup]="storyForm" (ngSubmit)="onSubmit()" mat-dialog-content>
+
+    <!-- Title -->
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title">
+    </mat-form-field>
+
+    <!-- Genre -->
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Genre</mat-label>
+        <input matInput formControlName="genre">
+    </mat-form-field>
+
+    <!-- Content -->
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Content</mat-label>
+        <textarea matInput formControlName="content" rows="6"></textarea>
+    </mat-form-field>
+
+    <!-- Thumbnail Preview -->
+    <div class="thumbnail-preview" *ngIf="previewUrl">
+        <p>Current Thumbnail:</p>
+        <img [src]="previewUrl" alt="Thumbnail" width="150">
+    </div>
+
+    <!-- Upload New Thumbnail -->
+    <div class="full-width file-upload">
+        <button mat-raised-button type="button" class="imagebutton" (click)="fileInput.click()">
+            <mat-icon>upload</mat-icon>
+            Upload Image
+        </button>
+        <input #fileInput type="file" (change)="onFileSelected($event)" hidden>
+    </div>
+
+</form>
+
+<mat-dialog-actions align="end" class="modalButton">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button color="primary" [disabled]="storyForm.invalid" (click)="onSubmit()"
+        [disabled]="btnDisable">Update</button>
+</mat-dialog-actions>

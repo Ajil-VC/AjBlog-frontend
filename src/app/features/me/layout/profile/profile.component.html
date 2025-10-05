@@ -1,0 +1,14 @@
+<div class="profile-container">
+
+    <div class="profile-pic">
+        <img src="https://avatar.iran.liara.run/public" alt="">
+    </div>
+
+    <div class="profile-details">
+        <h3>{{(authSer.$user | async)?.email}}</h3>
+
+        <div class="logout">
+            <a (click)="logOut()">Logout</a>
+        </div>
+    </div>
+</div>
