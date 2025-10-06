@@ -17,7 +17,7 @@ export class PostCardComponent {
         if (this.story.imageUrl?.url) {
             return this.story.imageUrl.url;
         }
-        return 'assets/images/default_story_thumbnail.webp';
+        return 'assets/images/default_story_thumbnail.jpg';
     }
     get dp() {
         return 'https://avatar.iran.liara.run/public';
