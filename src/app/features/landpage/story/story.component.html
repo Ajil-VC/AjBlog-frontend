@@ -14,7 +14,7 @@
         <div class="author">
             <img class="author-dp" [src]="dp" alt="Author DP" />
             <div>
-                <p class="author-email">{{ (sharedService.story$ | async)?.userId?.email }}</p>
+                <p class="author-email">{{ (sharedService.story$ | async)?.author?.email }}</p>
                 <p class="post-date">{{ (sharedService.story$ | async)?.createdAt | date:'medium' }}</p>
             </div>
         </div>
