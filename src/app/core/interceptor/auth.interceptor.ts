@@ -15,14 +15,13 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const toast = inject(ToastService);
 
   let cloneReq = req;
-  if (token) {
 
-    cloneReq = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-  }
+  cloneReq = req.clone({
+    setHeaders: token ? {
+      Authorization: `Bearer ${token}`
+    } : {},
+    withCredentials: true
+  });
 
 
   return next(cloneReq).pipe(
@@ -37,10 +36,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         return authService.refreshToken().pipe(
           switchMap(() => {
             // Retry original request with new access token
+            const token = shared.getToken();
             const newReq = cloneReq.clone({
-              setHeaders: {
-                Authorization: `Bearer ${shared.getToken()}`
-              }
+              setHeaders: token ? {
+                Authorization: `Bearer ${token}`
+              } : {},
+              withCredentials: true
             });
             return next(newReq);
           }),
