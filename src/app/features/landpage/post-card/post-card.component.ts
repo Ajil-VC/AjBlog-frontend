@@ -22,8 +22,7 @@ export class PostCardComponent {
     get dp() {
         return 'https://avatar.iran.liara.run/public';
     }
-    ngOnInit() {
-    }
+
 
     openStory() {
         this.shared.openStory(this.story);

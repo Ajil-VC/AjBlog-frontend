@@ -26,4 +26,12 @@ export class MainService {
   updateStory(formData: FormData): Observable<{ status: boolean, message: string, data: Post }> {
     return this.http.put<{ status: boolean, message: string, data: Post }>(`${environment.url}posts`, formData);
   }
+
+  deleteStory(storyId: string): Observable<{ status: boolean, message: string }> {
+    return this.http.delete<{ status: boolean, message: string }>(`${environment.url}posts?storyid=${storyId}`);
+  }
+
+  publishStory(storyId: string): Observable<{ status: boolean, message: string, data: Post }> {
+    return this.http.patch<{ status: boolean, message: string, data: Post }>(`${environment.url}posts`, { storyId });
+  }
 }

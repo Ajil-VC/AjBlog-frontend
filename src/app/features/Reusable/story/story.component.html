@@ -18,5 +18,8 @@
                 <p class="post-date">{{ (sharedService.story$ | async)?.createdAt | date:'medium' }}</p>
             </div>
         </div>
+
+        <button *ngIf="(isPublished$ | async) === false" class="publish-button"
+            (click)="publishStory()">Publish</button>
     </div>
 </div>

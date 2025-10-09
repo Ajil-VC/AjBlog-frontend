@@ -5,6 +5,9 @@
         <button class="tab" [class.active]="activeTab === 'create'" (click)="activeTab = 'create'">
             Create Post
         </button>
+        <button class="tab" [class.active]="activeTab === 'drafts'" (click)="activeTab = 'drafts'">
+            Drafts
+        </button>
         <button class="tab" [class.active]="activeTab === 'posts'" (click)="activeTab = 'posts'">
             My Posts
         </button>
@@ -31,22 +34,22 @@
                 </button>
                 <input type="file" #fileInput accept="image/*" style="display: none;" (change)="onFileSelected($event)">
 
-                <button type="submit">Publish</button>
+                <button type="submit">Create</button>
             </div>
         </form>
 
     </section>
 
-    <!-- Posts Section -->
-    <section *ngIf="activeTab === 'posts'" class="posts-list">
-        <h2>My Posts</h2>
+    <!-- Drafts Section -->
+    <section *ngIf="activeTab === 'drafts'" class="posts-list">
+        <h2>Drafts</h2>
         <div class="storyloopcontainer">
-            <article *ngFor="let story of stories" class="post">
+            <article *ngFor="let story of getStories('drafts')" class="post">
 
-                <div class="storythumb" (click)="openStory(story)">
-                    <img [src]="story.imageUrl?.url || 'assets/images/default_story_thumbnail.webp'">
+                <div class="storythumb" (click)="openStory(story, true)">
+                    <img [src]="story.imageUrl?.url || 'assets/images/default_story_thumbnail.jpg'">
                 </div>
-                <div class="storybody" (click)="openStory(story)">
+                <div class="storybody" (click)="openStory(story,true)">
                     <h3>{{ story.title }}</h3>
                     <p>{{ story.content }}</p>
                     <small>{{ story.createdAt | date:'mediumDate' }}</small>
@@ -54,6 +57,30 @@
 
                 <button class=" edit-btn" (click)="editStory(story); $event.stopPropagation()">
                     <i class="fas fa-edit"></i>
+                </button>
+
+            </article>
+        </div>
+    </section>
+
+
+    <!-- Posts Section -->
+    <section *ngIf="activeTab === 'posts'" class="posts-list">
+        <h2>My Posts</h2>
+        <div class="storyloopcontainer">
+            <article *ngFor="let story of getStories('posts')" class="post">
+
+                <div class="storythumb" (click)="openStory(story)">
+                    <img [src]="story.imageUrl?.url || 'assets/images/default_story_thumbnail.jpg'">
+                </div>
+                <div class="storybody" (click)="openStory(story)">
+                    <h3>{{ story.title }}</h3>
+                    <p>{{ story.content }}</p>
+                    <small>{{ story.createdAt | date:'mediumDate' }}</small>
+                </div>
+
+                <button class=" delete-btn" (click)="deleteStory(story); $event.stopPropagation()">
+                    <i class="fas fa-remove"></i>
                 </button>
 
             </article>

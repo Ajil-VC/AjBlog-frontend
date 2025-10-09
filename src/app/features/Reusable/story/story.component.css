@@ -33,7 +33,7 @@
 
 .post-footer {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
   margin-top: 1rem;
@@ -66,4 +66,16 @@
   margin: 0;
   font-size: 0.85rem;
   font-weight: bold;
+}
+
+.publish-button {
+  padding: 0.6rem 1.25rem;
+  background: #2563eb;
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }

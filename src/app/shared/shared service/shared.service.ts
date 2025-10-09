@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Post } from '../../core/domain/post.interface';
@@ -13,7 +13,12 @@ export class SharedService {
 
   private story = new BehaviorSubject<Post | null>(null);
   story$ = this.story.asObservable();
-  openStory(story: Post) {
+  openStory(story: Post, drafts: boolean = false) {
+    if (drafts) {
+      this.router.navigate(['publish-story']);
+      this.story.next(story);
+      return;
+    }
     this.router.navigate(['story']);
     this.story.next(story);
   }

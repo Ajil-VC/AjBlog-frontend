@@ -4,12 +4,13 @@ import { SigninSignupComponent } from './features/signin-signup/signin-signup.co
 import { MeComponent } from './features/me/me.component';
 import { authGuard } from './core/guards/auth.guard';
 import { signinGuard } from './core/guards/signin.guard';
-import { StoryComponent } from './features/landpage/story/story.component';
+import { StoryComponent } from './features/Reusable/story/story.component';
 
 export const routes: Routes = [
     { path: '', component: LandpageComponent },
     { path: 'signin', component: SigninSignupComponent, data: { type: 'sign_in' }, canActivate: [signinGuard] },
     { path: 'signup', component: SigninSignupComponent, data: { type: 'sign_up' }, canActivate: [signinGuard] },
     { path: 'me', component: MeComponent, canActivate: [authGuard] },
-    { path: 'story', component: StoryComponent }
+    { path: 'story', component: StoryComponent, data: { isPublished: true } },
+    { path: 'publish-story', component: StoryComponent, data: { isPublished: false } }
 ];

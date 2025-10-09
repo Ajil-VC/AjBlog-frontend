@@ -8,6 +8,7 @@ import { Post } from '../../../../core/domain/post.interface';
 import { SharedService } from '../../../../shared/shared service/shared.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditStoryComponent } from './edit-story/edit-story.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-field',
@@ -19,15 +20,14 @@ export class FieldComponent {
 
   @ViewChild('form') form!: NgForm;
   dialogRef = inject(MatDialog);
+  route = inject(Router);
   constructor(private toast: ToastService, private mainService: MainService, private shared: SharedService) { }
 
-  activeTab: 'create' | 'posts' = 'posts';
+  activeTab: 'create' | 'posts' | 'drafts' = 'posts';
   genre = genresData;
 
   newPost = { title: '', content: '', genre: '' };
-  posts = [
-    { title: 'My first post', content: 'Hello blog!', author: 'Sachin', date: new Date() }
-  ];
+
 
   selectedFile: File | null = null;
 
@@ -79,15 +79,24 @@ export class FieldComponent {
         if (res.status) {
           this.stories.unshift(res.data);
           this.newPost = { title: '', content: '', genre: '' };
-          this.activeTab = 'posts';
+          this.shared.openStory(res.data, true);
         }
       }
     });
 
   }
 
-  openStory(story: Post) {
-    this.shared.openStory(story);
+  getStories(view: 'posts' | 'drafts') {
+
+    if (view === 'posts') {
+
+      return this.stories.filter(story => story.active);
+    }
+    return this.stories.filter(story => !story.active);
+  }
+
+  openStory(story: Post, drafts: boolean = false) {
+    this.shared.openStory(story, drafts);
   }
 
   editStory(story: Post) {
@@ -126,6 +135,21 @@ export class FieldComponent {
       }
     });
 
+  }
+
+  deleteStory(story: Post) {
+
+    if (confirm(`Are you sure? You want to remove the story ${story.title} ?`)) {
+
+      this.mainService.deleteStory(story._id).subscribe({
+        next: (res) => {
+          if (res.status) {
+            this.stories = this.stories.filter(s => s._id !== story._id);
+            this.toast.showSuccess(res.message);
+          }
+        }
+      })
+    }
   }
 
 

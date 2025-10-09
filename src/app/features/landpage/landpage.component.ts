@@ -5,7 +5,7 @@ import { MainService } from '../data/main.service';
 import { Post } from '../../core/domain/post.interface';
 import { Subject } from 'rxjs';
 import { SharedService } from '../../shared/shared service/shared.service';
-import { PaginationComponent } from "../pagination/pagination.component";
+import { PaginationComponent } from "../Reusable/pagination/pagination.component";
 import { Router } from '@angular/router';
 
 @Component({

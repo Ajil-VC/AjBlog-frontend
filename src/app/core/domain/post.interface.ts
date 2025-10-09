@@ -19,6 +19,7 @@ export interface Post {
 
     createdAt?: Date,
     updatedAt?: Date,
+    active: boolean,
     author: {
         _id: string,
         email: string,
