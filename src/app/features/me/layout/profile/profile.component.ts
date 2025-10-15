@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../../../shared/Auth service/auth.service';
 import { User } from '../../../../core/domain/user.interface';
 import { AsyncPipe } from '@angular/common';
+import { RightclickpreventorDirective } from '../../../../core/directives/rightclickpreventor.directive';
 
 @Component({
   selector: 'app-profile',
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, RightclickpreventorDirective],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
